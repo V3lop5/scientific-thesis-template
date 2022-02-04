@@ -1,0 +1,7 @@
+# IntelliJ
+.idea/
+*.iml
+
+# TeXiFy-IDEA
+auxil/
+out/
