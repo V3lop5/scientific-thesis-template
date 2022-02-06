@@ -5,3 +5,6 @@
 # TeXiFy-IDEA
 auxil/
 out/
+
+# LaTeX
+*.synctex*

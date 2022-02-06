@@ -1,15 +1,62 @@
 %! Author = Paul
 %! Date = 04.02.2022
+%! Compiler = latexmk --shell-escape -pdf
+%! BibTeX Compiler = biber
 
-% Preamble
-\documentclass[11pt]{article}
+\input{config/pre-document-class.tex}
+\documentclass[
+    ngerman,
+    a4paper,
+    11pt,
+    twoside, % we are optimizing for both screen and two-side printing. So the page numbers will jump, but the content is configured to stay in the middle (by using the geometry package)
+    openright
+]{scrreprt} % TODO oder scrbook?
 
-% Packages
-\usepackage{amsmath}
 
-% Document
+% Include everything from Package
+\usepackage{config}
+\usepackage{blindtext}
+\usepackage{wasysym}
+
+
+% Include acronyms and glossary
+\input{acronyms}
+\input{glossary}
+
 \begin{document}
 
 
+    \hypersetup{pageanchor=false}
+
+% Prefix
+    \include{prefix/titlepage}
+    \include{prefix/declaration-of-independence}
+
+    \pagenumbering{arabic}
+
+    \include{prefix/abstract}
+    \include{prefix/toc}
+
+    \setcounter{page}{0}
+    \hypersetup{pageanchor=true}
+    \pagenumbering{arabic}
+
+% Chapters
+    \include{content/000-example}
+    \include{content/001-introduction}
+% INSERT more chapters here
+
+
+% Clear Page + null rein oder raus - damit die letzte Seite bündig ist.
+    \clearpage
+    \null
+    \clearpage
+    \appendix
+
+% INSERT Appendix here
+
+
+    \chapter{Quellenverzeichnis}\label{ch:quellenverzeichnis}
+    \printbibliography[heading=none]
 
 \end{document}
