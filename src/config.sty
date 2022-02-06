@@ -173,25 +173,28 @@
 
 
 % Layout der Seiten
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\pagestyle{fancyplain}
-
-
-\lhead[\fancyplain{}{\bfseries \small{\thepage}}]%
-{\fancyplain{}{\bfseries \small{\leftmark}}}
-\rhead[\fancyplain{}{\bfseries \small{\ArbeitKopfzeile}}]%
-{\fancyplain{}{\bfseries \small{\thepage}}}
-\lfoot[\fancyplain{}{}]%
-{\fancyplain{}{\bfseries \small{\Autor}}}
-\rfoot[\fancyplain{}{\bfseries \small{\ArbeitThema}}]%
-{\fancyplain{}{}}
-\cfoot{}
 
 \setlength{\textwidth}{15cm}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{10pt}
+
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}}
+\pagestyle{fancyplain}
+
+% \lhead[even pages]{odd pages}
+\lhead[\fancyplain{}{\bfseries \small{\leftmark}}]%
+{\fancyplain{}{}}
+\rhead[\fancyplain{}{}]%
+{\fancyplain{}{\bfseries \small{\rightmark}}}
+\lfoot[\fancyplain{}{\bfseries \small{\thepage}}]%
+{\fancyplain{}{}}
+\rfoot[\fancyplain{}{}]%
+{\fancyplain{}{\bfseries \small{\thepage}}}
+\cfoot{}
+
 \renewcommand{\headrulewidth}{0.2pt}
-\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0pt}
 
 \setlength{\evensidemargin}{0.5cm}
 \setlength{\oddsidemargin}{0.5cm}
@@ -202,7 +205,7 @@
 %%% Kapitelüberschriften
 \renewcommand\raggedchapter{\raggedleft}
 \renewcommand*{\chapterformat}{{%
-    \scalebox{4}{\selectfont\textcolor{gray}\thechapter}}}
+    \scalebox{4}{\selectfont\textcolor{gray!70}\thechapter}}}
 
 \makeatletter
 \renewcommand\chapterlinesformat[3]{%
@@ -220,11 +223,11 @@
 
 %%%% Abschnittsüberschriften
 \renewcommand\sectionformat{%
-    \textcolor{gray}{\thesection}\hspace*{10pt}%
+    \textcolor{gray!70}{\thesection}\hspace*{10pt}%
 }
 
 \renewcommand\subsectionformat{%
-    \textcolor{gray}{\thesubsection}\hspace*{10pt}%
+    \textcolor{gray!70}{\thesubsection}\hspace*{10pt}%
 }
 
 

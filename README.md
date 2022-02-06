@@ -16,12 +16,12 @@ This template contains
 ## TODOs
 - [ ] acro -> Glossary acrynom
 - [ ] Layout:
-  - Oben links Kapitelname (linke Doppelseite)
-  - Oben rechts Abschnittsname (rechte Doppelseite)
-  - Unten außen Seitenzahlen
-  - Striche oben ein bisschen breiter machen
-  - Unten kein Strich
-  - rhenag Logo aktualisieren
+  - DONE Oben links Kapitelname (linke Doppelseite)
+  - DONE Oben rechts Abschnittsname (rechte Doppelseite)
+  - DONE Unten außen Seitenzahlen
+  - DONE Striche oben ein bisschen länger machen
+  - DONE Unten kein Strich
+  - DONE rhenag Logo aktualisieren
   - DONE Kapitelnummern etwas dunkler (nicht viel)
   - Ggf. Textblock etwas nach außen schieben
   - Abstand von 3cm auf 2.5cm ändern?
@@ -33,7 +33,14 @@ This template contains
 - [ ] Commands for inline code
 - [ ] config aufteilen
 - [ ] CI/CD
-- [ ] Beispiele weiter vervollständigen
+- [ ] Beispiele und Tipps in LaTeX Beispiel schreiben.
+  - Quellenangaben
+  - Bilder
+  - Code
+  - Inline Code
+  - Tabellen
+  - Glossar
+  - Abkürzungen
 
 ## How to use
 Simply follow this guide step by step and you can start writing your thesis.
@@ -85,3 +92,6 @@ Simply paste them into ``references.bib`` and save it. After that you can use ``
 ### Glossary
 ### Acronyms
 ### Code listings
+
+## Quellen
+- [Logo der rhenag](https://www.rhenag.de/unternehmen/presse/pressefotos.html)

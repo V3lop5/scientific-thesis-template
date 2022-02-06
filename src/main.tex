@@ -50,14 +50,19 @@
 
 % Clear Page + null rein oder raus - damit die letzte Seite bündig ist.
     \clearpage
+    \thispagestyle{empty}
+    \null
+    \clearpage
+
+    \chapter*{Literaturverzeichnis}\label{ch:literature}
+    \printbibliography[heading=none]
+
+% Clear Page + null rein oder raus - damit die letzte Seite bündig ist.
+    \clearpage
+    \thispagestyle{empty}
     \null
     \clearpage
     \appendix
-
 % INSERT Appendix here
-
-
-    \chapter{Quellenverzeichnis}\label{ch:quellenverzeichnis}
-    \printbibliography[heading=none]
 
 \end{document}
