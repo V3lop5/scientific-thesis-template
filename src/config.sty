@@ -202,7 +202,7 @@
 %%% Kapitelüberschriften
 \renewcommand\raggedchapter{\raggedleft}
 \renewcommand*{\chapterformat}{{%
-    \scalebox{4}{\selectfont\textcolor{lightgray}\thechapter}}}
+    \scalebox{4}{\selectfont\textcolor{gray}\thechapter}}}
 
 \makeatletter
 \renewcommand\chapterlinesformat[3]{%
@@ -220,11 +220,11 @@
 
 %%%% Abschnittsüberschriften
 \renewcommand\sectionformat{%
-    \textcolor{lightgray}{\thesection}\hspace*{10pt}%
+    \textcolor{gray}{\thesection}\hspace*{10pt}%
 }
 
 \renewcommand\subsectionformat{%
-    \textcolor{lightgray}{\thesubsection}\hspace*{10pt}%
+    \textcolor{gray}{\thesubsection}\hspace*{10pt}%
 }
 
 
@@ -243,10 +243,6 @@
 \RedeclareSectionCommand[
     beforeskip=.6\baselineskip, afterskip=.01\baselineskip]{subsubsection}
 
-
-
-
-\newcommand{\printSignatureJPG}{1} % Unterschrift ausgeben? Bei Druck-Version muss dies 0 sein, bei Online 1
 
 
 \newcommand{\textOnly}{0} % Nur Text ausgeben?

@@ -22,7 +22,7 @@ This template contains
   - Striche oben ein bisschen breiter machen
   - Unten kein Strich
   - rhenag Logo aktualisieren
-  - Kapitelnummern etwas dunkler (nicht viel)
+  - DONE Kapitelnummern etwas dunkler (nicht viel)
   - Ggf. Textblock etwas nach außen schieben
   - Abstand von 3cm auf 2.5cm ändern?
 - [X] Schriftart verbessern. Ist jetzt komisch gezoomt. Wie war das im Bachelor gelöst?
