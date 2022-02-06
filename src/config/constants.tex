@@ -1,2 +1,81 @@
+%! suppress = DuplicateDefinition
 %! Author = Paul
 %! Date = 04.02.2022
+
+% Alle möglichen Konstanten, die in diesem Dokument verwendet werden.
+% TODO Diese Konstanten müssen aktualisiert werden!
+
+\newcommand{\IsTrue}{1}
+\newcommand{\IsFalse}{0}
+
+% Allgemeine Einstellungen
+
+% Handelt es sich um die Druckausgabe? (IsTrue/IsFalse)
+\newcommand{\Druckversion}{\IsFalse}
+
+\newcommand{\Subject}{Masterarbeit}
+\newcommand{\Titel}{Titel meiner Arbeit}
+
+\newcommand{\Autor}{Max Muster}
+\newcommand{\AutorStrasse}{Hauptstr. 1}
+\newcommand{\AutorPLZ}{50667}
+\newcommand{\AutorOrt}{Köln}
+
+\newcommand{\Matrikelnummer}{1337}
+\newcommand{\Abschluss}{Master of Science (M. Sc.)}
+\newcommand{\Studiengang}{Energiewirtschaft und Informatik}
+\newcommand{\Schwerpunkt}{Wirtschaftsinformatik}
+
+\newcommand{\Erstpruefer}{Prof. Dr.-Ing. Max Muster}
+\newcommand{\Zweitpruefer}{Max Muster, M. Sc.}
+\newcommand{\VorgelegtAm}{\today}
+
+\newcommand{\InFirma}{\IsTrue}
+\newcommand{\Firma}{rhenag Rheinische Energie AG}
+\newcommand{\FirmaStrasse}{Bayenthalgürtel 9}
+\newcommand{\FirmaPLZ}{50968}
+\newcommand{\FirmaOrt}{Köln}
+
+\newcommand{\ArbeitKopfzeile}{TODO Kopfzeile}
+\newcommand{\ArbeitThema}{TODO Thema der Arbeit für Kopfzeile}
+
+% Spezialisierte Konstanten (aus obigen erstellt)
+
+% PDF Metadaten
+\newcommand{\PDFAutor}{\Autor}
+\newcommand{\PDFTitle}{\Titel}
+\newcommand{\PDFSubject}{\Subject}
+
+% Titelseite
+\newcommand{\TitlepageTitle}{\Titel} % TODO ggf. Umbrüche einfügen
+\newcommand{\TitlepageSubject}{\Subject}
+\newcommand{\TitlepageSubjectDetail}{
+    {zur Erlangung des akademischen Grades \Abschluss}\\
+    {im Studiengang \Studiengang}\\
+    {mit Schwerpunkt \Schwerpunkt}
+}
+\newcommand{\TitlepageAuthor}{\Autor}
+\newcommand{\TitlepageAuthorStreet}{\AutorStrasse}
+\newcommand{\TitlepageAuthorCity}{\AutorPLZ\space\AutorOrt}
+\newcommand{\TitlepageAuthorMatrikel}{\Matrikelnummer}
+
+\newcommand{\TitlepageShowFirma}{\InFirma}
+\newcommand{\TitlepageFirma}{\FirmaStrasse, \FirmaPLZ\space\FirmaOrt}
+
+% Eigenständigkeitserklärung
+\newcommand{\IndependenceCity}{\AutorOrt}
+\newcommand{\IndependenceDate}{\VorgelegtAm}
+
+\newcommand{\IndependencePrintSignature}{\IsTrue}
+\if\PrintVersion\IsTrue
+    \renewcommand{\IndependencePrintSignature}{\IsFalse}
+\fi
+
+% Sperrvermerk
+\newcommand{\BlockingNoticeShow}{\InFirma} % Sperrvermerk anzeigen? \IsTrue oder \IsFalse
+\newcommand{\BlockingNoticeTitle}{\Titel}
+\newcommand{\BlockingNoticeFirma}{
+\Firma \\
+\FirmaStrasse \\
+\FirmaPLZ\space\FirmaOrt
+}

@@ -20,6 +20,7 @@ This template contains
   - Oben rechts Abschnittsname
   - Unten außen: Seitenzahlen
   - Striche oben ein bisschen breiter machen
+- [ ] Schriftart verbessern. Ist jetzt komisch gezoomt. Wie war das im Bachelor gelöst?
 - [ ] Commands for figures
 - [ ] Commands for code snippets
 - [ ] Commands for inline code

@@ -1,3 +1,5 @@
+% Modify directly or use the constants in config/constants.tex
+
 \begin{titlepage}
     \thispagestyle{empty}
     \newgeometry{right=0cm,left=0cm, top=0cm, bottom=0cm}
@@ -21,10 +23,8 @@
 
     \vspace{2cm}
 
-    {\LARGE \textbf{Masterarbeit}} \\[0.5cm]
-    {zur Erlangung des akademischen Grades Master of Science (M. Sc.)}\\
-    {im Studiengang Energiewirtschaft und Informatik}\\
-    {mit Schwerpunkt Wirtschaftsinformatik}
+    {\LARGE \textbf{\TitlepageSubject}} \\[0.5cm]
+    \TitlepageSubjectDetail
 
     \vspace{1cm}
 
@@ -43,28 +43,31 @@
     \begin{minipage}{0.8\textwidth}
         \renewcommand{\baselinestretch}{1.3}
         \begin{center}
-            \LARGE \textbf{\ArbeitTitelseite}
+            \LARGE \textbf{\TitlepageTitle}
         \end{center}
     \end{minipage}\\[.3cm]
     \rule{0.77\textwidth}{0.5pt}\\
     \vspace{0.5cm}
 
     \vspace{2cm}
-    durchgeführt bei \\[.5cm]
-    \includegraphics{./../resources/images/rhenag} \\[.3cm]
-    Bayenthalgürtel 9, 50968 Köln
-
+    \if\TitlepageShowFirma\IsTrue
+        durchgeführt bei \\[.5cm]
+        \includegraphics{./../resources/images/firma} \\[.3cm]
+        \TitlepageFirma
+    \else
+        \vspace{3cm}
+    \fi
     \vspace{2cm}
 
     \begin{tabular}{rl}
-        Eingereicht von: & \Autor \\
-        & \AutorStrasse \\
-        & \AutorOrt \\
-        Matrikelnummer: & \Matrikelnummer \\[.3cm]
+        Eingereicht von: & \TitlepageAuthor \\
+        & \TitlepageAuthorStreet \\
+        & \TitlepageAuthorCity \\
+        Matrikelnummer: & \TitlepageAuthorMatrikel \\[.3cm]
 
         Erstprüfer: & \Erstpruefer \\
         Zweitprüfer: & \Zweitpruefer \\[.5cm]
-        Vorgelegt am: & \VorgelegtAm % \today
+        Vorgelegt am: & \VorgelegtAm
     \end{tabular}
 
     \end{center}
