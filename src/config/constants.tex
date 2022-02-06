@@ -67,7 +67,8 @@
 \newcommand{\IndependenceDate}{\VorgelegtAm}
 
 \newcommand{\IndependencePrintSignature}{\IsTrue}
-\if\PrintVersion\IsTrue
+\if\Druckversion\IsTrue
+    % In Druckversion keine Unterschrift ausgeben
     \renewcommand{\IndependencePrintSignature}{\IsFalse}
 \fi
 
