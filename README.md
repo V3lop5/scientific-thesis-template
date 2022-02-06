@@ -15,13 +15,20 @@ This template contains
 
 ## TODOs
 - [ ] acro -> Glossary acrynom
-- [ ] Layout der Doppelseiten:
-  - Oben links Kapitelname
-  - Oben rechts Abschnittsname
-  - Unten außen: Seitenzahlen
+- [ ] Layout:
+  - Oben links Kapitelname (linke Doppelseite)
+  - Oben rechts Abschnittsname (rechte Doppelseite)
+  - Unten außen Seitenzahlen
   - Striche oben ein bisschen breiter machen
-- [ ] Schriftart verbessern. Ist jetzt komisch gezoomt. Wie war das im Bachelor gelöst?
+  - Unten kein Strich
+  - rhenag Logo aktualisieren
+  - Kapitelnummern etwas dunkler (nicht viel)
+  - Ggf. Textblock etwas nach außen schieben
+  - Abstand von 3cm auf 2.5cm ändern?
+- [X] Schriftart verbessern. Ist jetzt komisch gezoomt. Wie war das im Bachelor gelöst?
 - [ ] Commands for figures
+   - Klein/Mittel/Groß
+   - Landscape mode
 - [ ] Commands for code snippets
 - [ ] Commands for inline code
 - [ ] config aufteilen

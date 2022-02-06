@@ -15,11 +15,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
-% Umlaute
-\usepackage[T1]{fontenc}
-
 % Schriftart
 \usepackage{charter}
+\DeclareFontSeriesDefault[sf]{bf}{bx}
+
 
 % German language
 \usepackage[ngerman]{babel}
@@ -28,7 +27,7 @@
 
 % TODO zu prüfen
 \usepackage[dvipsnames]{xcolor}
-\usepackage{listings,listings-ext}
+\usepackage{listings,listings-ext} % TODO Minted dazu?
 \usepackage{geometry} % Layout Gemoetriegeschichten
 
 \usepackage{fancyhdr} % Schönes Layout
@@ -50,9 +49,6 @@
 \setlength\marginparwidth{1in}
 
 
-% Beliebige Schriftgrößen
-% See https://tex.stackexchange.com/questions/58087/how-to-remove-the-warnings-font-shape-ot1-cmss-m-n-in-size-4-not-available
-\usepackage{anyfontsize}
 
 % Verlinkungen
 \usepackage[
