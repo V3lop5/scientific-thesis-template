@@ -14,7 +14,7 @@ This template contains
 - CI/CD
 
 ## TODOs
-- [ ] acro -> Glossary acrynom
+- [X] acro -> Glossary acrynom
 - [ ] Layout:
   - DONE Oben links Kapitelname (linke Doppelseite)
   - DONE Oben rechts Abschnittsname (rechte Doppelseite)
@@ -25,13 +25,13 @@ This template contains
   - DONE Kapitelnummern etwas dunkler (nicht viel)
   - Ggf. Textblock etwas nach außen schieben
   - Abstand von 3cm auf 2.5cm ändern?
+  - NOOO Seitenzahlen auf neuer Chapter Seite ausgeben?
 - [X] Schriftart verbessern. Ist jetzt komisch gezoomt. Wie war das im Bachelor gelöst?
 - [ ] Commands for figures
    - Klein/Mittel/Groß
    - Landscape mode
 - [ ] Commands for code snippets
-- [ ] Commands for inline code
-- [ ] config aufteilen
+- [X] Commands for inline code
 - [ ] CI/CD
 - [ ] Beispiele und Tipps in LaTeX Beispiel schreiben.
   - Quellenangaben

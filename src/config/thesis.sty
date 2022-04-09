@@ -8,50 +8,51 @@
 
 
 % Enable copy and paste of text from the PDF
-\usepackage{cmap}
+\RequirePackage{cmap}
 
 
 % Use UTF-8 encoding
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{graphicx}
 
 % Schriftart
-\usepackage{charter}
+\RequirePackage{charter}
 \DeclareFontSeriesDefault[sf]{bf}{bx}
+\RequirePackage{bold-extra}
 
 
 % German language
-\usepackage[ngerman]{babel}
+\RequirePackage[ngerman]{babel}
 
 
 
 % TODO zu prüfen
-\usepackage[dvipsnames]{xcolor}
-\usepackage{listings,listings-ext} % TODO Minted dazu?
-\usepackage{geometry} % Layout Gemoetriegeschichten
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{listings,listings-ext} % TODO Minted dazu?
+\RequirePackage{geometry} % Layout Gemoetriegeschichten
 
-\usepackage{fancyhdr} % Schönes Layout
-\usepackage{expdlist} % Verbessert descriptions
-\usepackage{tabularx} % Tabellen
-\usepackage[export]{adjustbox} % loads also graphicx
-\usepackage[section]{placeins} % Floating
-\usepackage{subfig} % Mehrere Figuren in einer Abbildung
-\usepackage[all]{nowidow} % Better formatting
+\RequirePackage{fancyhdr} % Schönes Layout
+\RequirePackage{expdlist} % Verbessert descriptions
+\RequirePackage{tabularx} % Tabellen
+\RequirePackage[export]{adjustbox} % loads also graphicx
+\RequirePackage[section]{placeins} % Floating
+\RequirePackage{subfig} % Mehrere Figuren in einer Abbildung
+\RequirePackage[all]{nowidow} % Better formatting
 
-\usepackage{chngcntr} % Fußnoten komplett hochzählen und nicht nur in Kapiteln
+\RequirePackage{chngcntr} % Fußnoten komplett hochzählen und nicht nur in Kapiteln
 \counterwithout{footnote}{chapter}
 % \setlength{\skip\footins}{Länge}
 
 
 
 % Notizen (zum Deaktivieren [disable])
-\usepackage[textwidth=25mm,textsize=footnotesize]{todonotes}
+\RequirePackage[textwidth=25mm,textsize=footnotesize]{todonotes}
 \setlength\marginparwidth{1in}
 
 
 
 % Verlinkungen
-\usepackage[
+\RequirePackage[
     breaklinks=false,
     linktocpage=false,
     linkcolor=black,
@@ -65,21 +66,37 @@
     pdfsubject={\PDFSubject},
 ]{hyperref}
 
-\usepackage[german]{fancyref}
+\RequirePackage[german]{fancyref}
 
 % TODO Replace it? https://tex.stackexchange.com/questions/287080/best-solution-for-acronyms-abbreviations-glossary-and-index
-\usepackage{acro} % Abkürzungsverzeichnis
-\acsetup{
-    make-links = true,
-    list/template = tabular % TODO prüfen und ggf rausnehmen. Dann sind ACRO wieder wild
-}
+%\RequirePackage{acro} % Abkürzungsverzeichnis
+%\acsetup{
+%    make-links = true,
+%    list/template = tabular % TODO prüfen und ggf rausnehmen. Dann sind ACRO wieder wild
+%}
 
 % Glossar
-\usepackage[makeindex,toc,automake,style=indexgroup]{glossaries-extra}
+\RequirePackage[makeindex,toc,automake,style=indexgroup, acronym]{glossaries-extra}
 \glstocfalse % Disable section in TOC
 
+\newcommand*{\newdualentry}[5][]{ %
+    \newglossaryentry{main-#2}{
+        name={#4 (#3)},
+        text={#3\glsadd{#2}},
+        description={{#5}},
+        #1
+    } %
+    \newglossaryentry{#2}{
+        type=\acronymtype,
+        first={#4 (#3)},
+        name={#3\glsadd{main-#2}},
+        description={\glslink{main-#2}{#4}}
+    }
+}
+
+
 % Quellen
-\usepackage[
+\RequirePackage[
     backend   = biber,
     style     = numeric,
     sorting   = none,
@@ -96,15 +113,15 @@
 \setcounter{biburlucpenalty}{8000}
 
 % Warnungen verhindern
-% \usepackage{scrhack} % Verhindert scrreprt Warnungen
+% \RequirePackage{scrhack} % Verhindert scrreprt Warnungen
 
 % Zitation
-\usepackage{csquotes}
+\RequirePackage{csquotes}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Style
+% Style of code snippets
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -172,7 +189,11 @@
 
 
 
-% Layout der Seiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Style of the document
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\textwidth}{15cm}
 \setlength{\parindent}{0pt}
@@ -247,9 +268,6 @@
     beforeskip=.6\baselineskip, afterskip=.01\baselineskip]{subsubsection}
 
 
-
-\newcommand{\textOnly}{0} % Nur Text ausgeben?
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Commands
@@ -260,14 +278,14 @@
     \colorbox{gray!8}{\lstinline[
         language=Kotlin,
         breaklines,
-        showstringspaces=false
+        showstringspaces=false,
     ]{#1}}
 } % Beispiel: \kotlin{fun asString() = this.toString()}
 
 \newcommand{\kotlinfile}[2]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [kotlincode here, remove \textbackslash{}textOnly] \label{lst:#1}
+        [kotlincode here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{lst:#1}
     }{
         \begin{figure}[!htp]
             \centering
@@ -278,7 +296,7 @@
             %   bgcolor=gray!8,
             %   baselinestretch=1,
             %   style=pastie, % igor % perldoc % friendly
-            %   framesep=2mm]{kotlin}{attachments/code/#1}
+            %   framesep=2mm]{kotlin}{./../resources/code/#1}
             \lstinputlisting[
                 language=Kotlin,
                 breaklines,
@@ -288,7 +306,7 @@
                 postbreak=\llap{\scriptsize\textcolor{blue}{$\hookrightarrow$}\kern0.25em},
                 showstringspaces=false,
                 numberstyle=\scriptsize,
-                frame=lines]{attachments/code/#1}
+                frame=lines]{./../resources/code/#1}
             \caption{#2}
             \label{lst:#1}
         \end{figure}
@@ -296,9 +314,9 @@
 } % Beispiel: \kotlinfile{Example.kt}{Beispiel Code für xyz}
 
 \newcommand{\yamlfile}[2]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [yamlfile here, remove \textbackslash{}textOnly] \label{lst:#1}
+        [yamlfile here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{lst:#1}
     }{
         \begin{figure}[!htp]
             \centering
@@ -309,7 +327,7 @@
             %   bgcolor=gray!8,
             %   baselinestretch=1,
             %   style=pastie, % igor % perldoc % friendly
-            %   framesep=2mm]{kotlin}{attachments/code/#1}
+            %   framesep=2mm]{kotlin}{./../resources/code/#1}
             \lstinputlisting[
                 language=yaml,
                 breaklines,
@@ -320,7 +338,7 @@
                 showstringspaces=false,
                 numberstyle=\scriptsize\color{black},
                 rulecolor=\color{black},
-                frame=lines]{attachments/code/#1}
+                frame=lines]{./../resources/code/#1}
             \caption{#2}
             \label{lst:#1}
         \end{figure}
@@ -328,9 +346,9 @@
 } % Beispiel: \yamlfile{Example.yaml}{Beispiel YAML für xyz}
 
 \newcommand{\textfile}[2]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [textfile here, remove \textbackslash{}textOnly] \label{txt:#1}
+        [textfile here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{txt:#1}
     }{
         \begin{figure}[!htp]
             \centering
@@ -344,7 +362,7 @@
                 postbreak=\llap{\scriptsize\textcolor{blue}{$\hookrightarrow$}\kern0.25em},
                 showstringspaces=false,
                 numberstyle=\scriptsize,
-                frame=lines]{attachments/text/#1}
+                frame=lines]{./../resources/text/#1}
             \caption{#2}
             \label{lst:#1}
         \end{figure}
@@ -353,13 +371,13 @@
 
 
 \newcommand{\image}[2]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [image here, remove \textbackslash{}textOnly] \label{image:#1}
+        [image here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#1}
     }{
         \begin{figure}[!htp]
             \centering
-            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio]{attachments/images/#1}
+            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio]{./../resources/images/#1}
             \caption{#2}
             \label{image:#1}
         \end{figure}
@@ -368,13 +386,13 @@
 
 
 \newcommand{\imagebig}[2]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [big image here, remove \textbackslash{}textOnly] \label{image:#1}
+        [big image here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#1}
     }{
         \begin{figure}[!htp]
             \centering
-            \includegraphics[max height=19cm,max width=\textwidth,keepaspectratio]{attachments/images/#1}
+            \includegraphics[max height=19cm,max width=\textwidth,keepaspectratio]{./../resources/images/#1}
             \caption{#2}
             \label{image:#1}
         \end{figure}
@@ -382,13 +400,13 @@
 } % Beispiel: \imagebig{Funny.PNG}{Dies ist eine Beschreibung}
 
 \newcommand{\imagescale}[3]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [scaled image here, remove \textbackslash{}textOnly] \label{image:#1}
+        [scaled image here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#1}
     }{
         \begin{figure}[!htp]
             \centering
-            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio, scale=#3]{attachments/images/#1}
+            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio, scale=#3]{./../resources/images/#1}
             \caption{#2}
             \label{image:#1}
         \end{figure}
@@ -396,13 +414,13 @@
 } % Beispiel: \image{Funny.PNG}{Dies ist eine Beschreibung}{1.5}
 
 \newcommand{\imagedesc}[3]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [image with desc here, remove \textbackslash{}textOnly] \label{image:#1}
+        [image with desc here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#1}
     }{
         \begin{figure}[!htp]
             \centering
-            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio]{attachments/images/#1}\\
+            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio]{./../resources/images/#1}\\
             #3
             \caption{#2}
             \label{image:#1}
@@ -412,13 +430,13 @@
 
 
 \newcommand{\imagedescscale}[4]{
-    \ifthenelse{\equal{\textOnly}{1}}
+    \ifthenelse{\equal{\TextOnly}{1}}
     {
-        [scaled image with desc here, remove \textbackslash{}textOnly] \label{image:#3}
+        [scaled image with desc here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#3}
     }{
         \begin{figure}[!htp]
             \centering
-            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio, scale=#4]{attachments/images/#1}\\
+            \includegraphics[max height=19cm,max width=0.9\textwidth,keepaspectratio, scale=#4]{./../resources/images/#1}\\
             #3
             \caption{#2}
             \label{image:#1}

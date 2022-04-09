@@ -9,8 +9,9 @@
 
 % TODO Hier Verzeichnis der Codeausschnitte einfügen?
 
-\printacronyms[heading=chapter*] % Abkürzungsverzeichnis % TODO Nach vorne?
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+\printglossary[type=\acronymtype, nonumberlist, title={Abkürzungsverzeichnis}, style=super] % Abkürzungsverzeichnis
 \cleardoublepage
 
-\printglossary[nonumberlist] % Glossar nonumberlist=Referenzen anzeigen % TODO Nach vorne?
+\printglossary[nonumberlist] % Glossar nonumberlist=Referenzen anzeigen
 \cleardoublepage
