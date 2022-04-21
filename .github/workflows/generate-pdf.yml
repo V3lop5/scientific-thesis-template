@@ -30,6 +30,10 @@ jobs:
           working_directory: src
           args: -output-format=pdf -output-directory=./out --shell-escape -interaction=nonstopmode -bibtex -f
 
+      - name: Show all files
+        if: always()
+        run: ls -l
+
       - name: Upload PDF
         uses: actions/upload-artifact@v3
         if: always()
