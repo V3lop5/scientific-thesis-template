@@ -29,7 +29,7 @@ jobs:
           root_file: main.tex
           working_directory: src
           latexmk_shell_escape: true
-          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out -f
+          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out -e "$max_repeat=10"
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
