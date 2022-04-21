@@ -32,7 +32,7 @@ jobs:
 
       - name: Show all files
         if: always()
-        run: ls -l
+        run: ls -lR
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
