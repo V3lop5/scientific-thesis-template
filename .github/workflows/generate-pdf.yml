@@ -1,0 +1,66 @@
+name: Generate PDF
+on:
+  push:
+    branches:
+      - main
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # If previous build is still running this will cancel it.
+  cancel_previous_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Workflow Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3.0.1
+
+      - name: Generate PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main.tex
+          latexmk_shell_escape: true
+          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: out/main.pdf
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3.0.1
+
+      - name: Download PDF
+        uses: actions/download-artifact@v3
+        with:
+          name: PDF
+
+      - name: Generate name
+        id: name
+        run: |
+          pdfdate=$(date +%Y %m %d %H %M)
+          tagdate=$(date +%Y.%m.%d)
+          echo "::set-output name=pdf-name::${pdfdate} ${{ github.event.repository.name }}.pdf"
+          echo "::set-output name=tag::v${tagdate}"
+
+      - name: Create release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ github.token }}
+          file: out/main.pdf
+          asset_name: "${{ steps.name.outputs.pdf-name }}.pdf"
+          tag: ${{ steps.name.outputs.tag }}
+          release_name: "Generated PDF @ ${{ steps.name.outputs.tag }}"
+          overwrite: true
+          body: "Generated PDF @ ${{ steps.name.outputs.tag }}"
