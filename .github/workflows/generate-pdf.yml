@@ -30,16 +30,12 @@ jobs:
           working_directory: src
           args: -output-format=pdf -output-directory=./out --shell-escape -interaction=nonstopmode -bibtex -f
 
-      - name: Show all files
-        if: always()
-        run: ls -lR
-
       - name: Upload PDF
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: PDF
-          path: out/main.pdf
+          path: src/out/main.pdf
 
   publish:
     runs-on: ubuntu-latest
@@ -65,7 +61,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ github.token }}
-          file: out/main.pdf
+          file: src/out/main.pdf
           asset_name: "${{ steps.name.outputs.pdf-name }}.pdf"
           tag: ${{ steps.name.outputs.tag }}
           release_name: "Generated PDF @ ${{ steps.name.outputs.tag }}"
