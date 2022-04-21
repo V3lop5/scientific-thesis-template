@@ -52,8 +52,8 @@ jobs:
       - name: Generate name
         id: name
         run: |
-          pdfdate=$(date +%Y %m %d %H %M)
-          tagdate=$(date +%Y.%m.%d)
+          pdfdate=$(date +"%Y %m %d %H %M")
+          tagdate=$(date +"%Y.%m.%d")
           echo "::set-output name=pdf-name::${pdfdate} ${{ github.event.repository.name }}.pdf"
           echo "::set-output name=tag::v${tagdate}"
 
