@@ -28,8 +28,7 @@ jobs:
         with:
           root_file: main.tex
           working_directory: src
-          latexmk_shell_escape: true
-          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out
+          args: -output-format=pdf -output-directory=./out --shell-escape -interaction=nonstopmode -bibtex
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
