@@ -61,7 +61,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ github.token }}
-          file: src/out/main.pdf
+          file: main.pdf
           asset_name: "${{ steps.name.outputs.pdf-name }}.pdf"
           tag: ${{ steps.name.outputs.tag }}
           release_name: "Generated PDF @ ${{ steps.name.outputs.tag }}"
