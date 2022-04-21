@@ -52,9 +52,9 @@ jobs:
       - name: Generate name
         id: name
         run: |
-          pdfdate=$(date +"%Y %m %d %H %M")
+          pdfdate=$(date +"%Y_%m_%d__%H_%M")
           tagdate=$(date +"%Y.%m.%d")
-          echo "::set-output name=pdf-name::${pdfdate} ${{ github.event.repository.name }}.pdf"
+          echo "::set-output name=pdf-name::${pdfdate}__${{ github.event.repository.name }}.pdf"
           echo "::set-output name=tag::v${tagdate}"
 
       - name: Create release
@@ -62,7 +62,7 @@ jobs:
         with:
           repo_token: ${{ github.token }}
           file: main.pdf
-          asset_name: "${{ steps.name.outputs.pdf-name }}.pdf"
+          asset_name: "${{ steps.name.outputs.pdf-name }}"
           tag: ${{ steps.name.outputs.tag }}
           release_name: "Generated PDF @ ${{ steps.name.outputs.tag }}"
           overwrite: true
