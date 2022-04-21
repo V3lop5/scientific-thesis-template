@@ -30,6 +30,7 @@
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{listings,listings-ext} % TODO Minted dazu?
 \RequirePackage{geometry} % Layout Gemoetriegeschichten
+\RequirePackage{pdflscape} % Landscape
 
 \RequirePackage{fancyhdr} % Schönes Layout
 \RequirePackage{expdlist} % Verbessert descriptions
@@ -443,6 +444,22 @@
         \end{figure}
     }
 } % Beispiel: \imagedesc{Funny.PNG}{Dies ist eine Beschreibung}{Zusätzliche Beschreibung}{0.9}
+
+\newcommand{\landscapeimage}[2]{
+    \ifthenelse{\equal{\TextOnly}{1}}
+    {
+        [landscape image here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{image:#1}
+    }{
+        \begin{landscape}
+            \begin{figure}[!htp]
+                \centering
+                \includegraphics[keepaspectratio]{./../resources/images/#1}
+                \caption{#2}
+                \label{image:#1}
+            \end{figure}
+        \end{landscape}
+    }
+}
 
 \newcommand{\code}[1]{\texttt{#1}} % Beispiel: \code{Funny yoo}
 
