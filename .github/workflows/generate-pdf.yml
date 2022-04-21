@@ -26,9 +26,10 @@ jobs:
       - name: Generate PDF
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: src/main.tex
+          root_file: main.tex
+          working_directory: src
           latexmk_shell_escape: true
-          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out -e "$max_repeat=10"
+          args: -pdf -interaction=nonstopmode -bibtex -output-directory=./out
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
