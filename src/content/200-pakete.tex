@@ -1,0 +1,78 @@
+\chapter{Pakete}\label{ch:packages}
+
+In diesem Template sind verschiedene Pakete eingebunden, die für das Schreiben von wissenschaftlichen Arbeiten im Informatik-Bereich nützlich sind.
+In den nachfolgenden Abschnitten wird auf die einzelnen Pakete und deren nutzen eingegangen.
+Sämtliche Pakete werden in der \directory{src/config/thesis.sty} eingebunden.
+
+\section{Bibliographie}\label{sec:bibliography}
+- Biblatex
+- Biber
+- Back Reference
+- Farbliche Hervorhebung
+- Definition über references.bib
+
+\section{Glossare \& Abkürzungen}\label{sec:glossaries}
+- Glossaries
+- Abkürzungen
+- Definition über die zwei Dateien
+
+
+\section{Aufzählungen}\label{sec:lists}
+
+\section{Figuren}\label{sec:figures}
+
+\subsection{Tabellen}\label{subsec:tables}
+
+
+\subsection{Bilder}\label{subsec:images}
+- Landscape
+- subfig
+
+Ein eingefügtes Bild wird von \LaTeX bestmöglich im Text eingefügt.
+
+
+\subsection{Quellcode}\label{subsec:code}
+- Listings
+- Verschiedene Befehle für die verschiedensten Sprachen
+
+\section{Mathe}\label{sec:math}
+- icoma
+- amsmath
+
+Mehrere Formeln können in einer Umgebung stehen, die mit \verb|\begin{align}| und \verb|\end{align}| eingeleitet und beendet wird.
+Die Formeln werden dabei automatisch nummeriert.
+Durch das Schlüsselwort \verb|\label| kann eine Formel mit einem Label versehen werden, das dann in der Fußnote der Formel angezeigt wird.
+Zusätzlich können die Formeln zentriert werden, indem die Umgebung mit \verb|\begin{align*}| und \verb|\end{align*}| eingeleitet und beendet wird.
+
+\section{Zeichen \& Symbole}\label{sec:symbols}
+- charter
+- wasysym
+- menukeys
+- directory
+
+\section{Farben}\label{sec:colors}
+- xcolor
+
+\section{TODO-Notizen}\label{sec:todo}
+\inProgress
+
+Während des Schreibflusses können nicht alle Sachen direkt umgesetzt werden.
+Daher ist es sinnvoll, sich Notizen zu machen, die später bearbeitet werden können.
+
+Mit dem Befehl \verb|\todo| können solche Notizen erstellt werden \todo{Satz vervollständigen}
+
+Ein weiterer Befehl ist der \verb|\inProgress| Befehl, welcher einen kleinen Marker anzeigt, dass das Kapitel noch nicht fertig ist.
+Die Korrekturleser wissen dadurch, dass sie dieses Kapitel oder Abschnitt erstmal überspringen können.
+
+\section{Das PDF}\label{sec:pdf}
+Damit der Leser Spaß am Lesen hat, wurden in diesem Template Pakte eingebunden, die das PDF funktional ansprechender machen.
+
+Dazu zählt zum Beispiel das Paket \verb|hyperref|, das die Verlinkung zwischen den Kapiteln und den Fußnoten ermöglicht.
+Außerdem wird die PDF-Gliederung automatisch erstellt.
+
+Das Paket \verb|cmap| ermöglicht es, Texte in mit der Maus zu markieren und diese dann zu kopieren.
+
+In \labelref{sec:bibliography} wurde bereits darauf eingegangen, dass Quellenverweise angeklickt werden können, um zu der entsprechenden Quelle im Literaturverzeichnis zu springen.
+Durch die Ergänzung des Hinweises \textit{Referenziert auf der Seite 42} kann der Leser zu der ursprünglichen Textpassage zurückkehren.
+
+\section{Die Basics}\label{sec:basics}

@@ -1,17 +1,25 @@
+\cleardoublepage % Force bookmark to correct page
+\pdfbookmark{\contentsname}{toc} % pdf bookmark für PDF-Gliederung
 \tableofcontents % Inhaltsverzeichnis
-\cleardoublepage
 
+\cleardoublepage
+\phantomsection\addcontentsline{toc}{chapter}{\listfigurename} % Dummy Eintrag für ToC (und pdf bookmark)
 \listoffigures % Abbildungsverzeichnis
-\cleardoublepage
 
-\listoftables % Tabellenverzeichnis
 \cleardoublepage
+\phantomsection\addcontentsline{toc}{chapter}{\listtablename} % Dummy Eintrag für ToC (und pdf bookmark)
+\listoftables % Tabellenverzeichnis
 
 % TODO Hier Verzeichnis der Codeausschnitte einfügen?
 
+\glsaddall
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
-\printglossary[type=\acronymtype, nonumberlist, title={Abkürzungsverzeichnis}, style=super] % Abkürzungsverzeichnis
-\cleardoublepage
+\printglossary[type=\acronymtype, nonumberlist, nogroupskip, title={Abkürzungsverzeichnis}, style=super] % Abkürzungsverzeichnis
+% Automatisch in ToC, siehe glossaries-package Optionen
 
+\cleardoublepage
+\renewcommand{\glsnamefont}[1]{\textbf{#1}.}
 \printglossary[nonumberlist] % Glossar nonumberlist=Referenzen anzeigen
+% Automatisch in ToC, siehe glossaries-package Optionen
+
 \cleardoublepage

@@ -20,47 +20,71 @@
 \DeclareFontSeriesDefault[sf]{bf}{bx}
 \RequirePackage{bold-extra}
 
+% Math equations
+\RequirePackage{amsmath}
+\numberwithin{equation}{chapter}
+\setlength{\jot}{10pt}
 
 % German language
 \RequirePackage[ngerman]{babel}
 
 
 
-% TODO zu prüfen
-\RequirePackage[dvipsnames]{xcolor}
-\RequirePackage{listings,listings-ext} % TODO Minted dazu?
+% Farben
+\RequirePackage[dvipsnames]{xcolor} % https://en.wikibooks.org/wiki/LaTeX/Colors
+\definecolor{gls-ref-color}{cmyk}{0.75,0,0.4,0.1}  % FH AC MINT + xx % K https://www.designtagebuch.de/cd-manuals/FHAAC_Styleguide_Basiselemente_04_2012.pdf
+\definecolor{cite-ref-color}{cmyk}{0.75,0,0.4,0.1}  % FH AC MINT + xx % K https://www.designtagebuch.de/cd-manuals/FHAAC_Styleguide_Basiselemente_04_2012.pdf
+\definecolor{chapter-number-color}{cmyk}{0,0,0,0.5} % FH AC Schwarz
+\definecolor{section-number-color}{cmyk}{0,0,0,0.5} % FH AC Schwarz
+\definecolor{subsection-number-color}{cmyk}{0,0,0,0.5} % FH AC Schwarz
+\definecolor{lst-postbreak-color}{cmyk}{0.75,0,0.4,0} % FH AC MINT
+\colorlet{lst-background-color}{gray!8} % Light gray
+
+
+\RequirePackage{listings,listings-ext}
 \RequirePackage{geometry} % Layout Gemoetriegeschichten
 \RequirePackage{pdflscape} % Landscape
 
 \RequirePackage{fancyhdr} % Schönes Layout
 \RequirePackage{expdlist} % Verbessert descriptions
 \RequirePackage{tabularx} % Tabellen
+\RequirePackage{multirow} % Noch mehr Tabellen
 \RequirePackage[export]{adjustbox} % loads also graphicx
 \RequirePackage[section]{placeins} % Floating
 \RequirePackage{subfig} % Mehrere Figuren in einer Abbildung
 \RequirePackage[all]{nowidow} % Better formatting
+\RequirePackage{xspace} % Space between elements i guess
+\RequirePackage{icomma} % Comma as decimal separator e.G. $1,2$ instead of $1.2$
 
 \RequirePackage{chngcntr} % Fußnoten komplett hochzählen und nicht nur in Kapiteln
 \counterwithout{footnote}{chapter}
 % \setlength{\skip\footins}{Länge}
 
 
-
 % Notizen (zum Deaktivieren [disable])
-\RequirePackage[textwidth=25mm,textsize=footnotesize]{todonotes}
+\RequirePackage[textwidth=25mm,textsize=scriptsize,backgroundcolor=Yellow,linecolor=YellowOrange]{todonotes}
 \setlength\marginparwidth{1in}
 
+\RequirePackage{enumitem} % Enumeration
+\newenvironment{faq}{\begin{description}[style=nextline]}{\end{description}}
 
+\newcommand{\SubItem}[1]{ % Add supitems to enumerations
+        {\setlength\itemindent{15pt} \item[-] #1}
+}
+
+% LoF, LoT, Bibliography in ToC
+% \RequirePackage[nottoc]{tocbibind}
+% Achtung! Verunstaltet die Formatierung in LoF und LoT
 
 % Verlinkungen
 \RequirePackage[
     breaklinks=false,
     linktocpage=false,
     linkcolor=black,
-    citecolor=magenta,
+    citecolor=cite-ref-color,
     colorlinks=true,
     urlcolor=black,
-    % PDF metadata
+% PDF metadata
     pdftex,
     pdfauthor={\PDFAutor},
     pdftitle={\PDFTitle},
@@ -69,16 +93,12 @@
 
 \RequirePackage[german]{fancyref}
 
-% TODO Replace it? https://tex.stackexchange.com/questions/287080/best-solution-for-acronyms-abbreviations-glossary-and-index
-%\RequirePackage{acro} % Abkürzungsverzeichnis
-%\acsetup{
-%    make-links = true,
-%    list/template = tabular % TODO prüfen und ggf rausnehmen. Dann sind ACRO wieder wild
-%}
-
-% Glossar
-\RequirePackage[makeindex,toc,automake,style=indexgroup, acronym]{glossaries-extra}
-\glstocfalse % Disable section in TOC
+% Glossar (https://en.wikibooks.org/wiki/LaTeX/Glossary)
+\RequirePackage[makeindex,toc,automake,acronym,shortcuts]{glossaries-extra}
+\RequirePackage{glossary-mcols}
+\setglossarystyle{mcolindex} % mcolindex, mcolindexgroup, indexgroup, index, list
+%\glstocfalse % Disable section in TOC
+\renewcommand*{\glstextformat}[1]{{\color{gls-ref-color} #1}}
 
 \newcommand*{\newdualentry}[5][]{ %
     \newglossaryentry{main-#2}{
@@ -101,7 +121,7 @@
     backend   = biber,
     style     = numeric,
     sorting   = none,
-    backref   = true
+    backref   = false  % Eigentlich ganz cool, aber Probleme mit pageanchor
 ]{biblatex}
 \addbibresource{references.bib}
 \DefineBibliographyStrings{german}{
@@ -119,6 +139,13 @@
 % Zitation
 \RequirePackage{csquotes}
 
+% Symbole
+\RequirePackage{wasysym}
+
+% Keys (\keys{F1})
+\RequirePackage[os=win]{menukeys}
+
+\RequirePackage{xstring}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -205,6 +232,7 @@
 \pagestyle{fancyplain}
 
 % \lhead[even pages]{odd pages}
+% \fancyplain{first page of chapter}{the following pages}
 \lhead[\fancyplain{}{\bfseries \small{\leftmark}}]%
 {\fancyplain{}{}}
 \rhead[\fancyplain{}{}]%
@@ -212,7 +240,7 @@
 \lfoot[\fancyplain{}{\bfseries \small{\thepage}}]%
 {\fancyplain{}{}}
 \rfoot[\fancyplain{}{}]%
-{\fancyplain{}{\bfseries \small{\thepage}}}
+{\fancyplain{\bfseries \small{\thepage}}{\bfseries \small{\thepage}}}
 \cfoot{}
 
 \renewcommand{\headrulewidth}{0.2pt}
@@ -227,14 +255,17 @@
 %%% Kapitelüberschriften
 \renewcommand\raggedchapter{\raggedleft}
 \renewcommand*{\chapterformat}{{%
-    \scalebox{4}{\selectfont\textcolor{gray!70}\thechapter}}}
+    \scalebox{4}{\selectfont\textcolor{chapter-number-color}\thechapter}}}
 
 \makeatletter
 \renewcommand\chapterlinesformat[3]{%
     \Ifstr{#1}{chapter}
     {
-        \parbox[t]{\textwidth}{\hfill{  {#2} }}%
-        \newline
+        \IfInteger{\thepage}{%
+        % Only on real pages print the number big
+            \parbox[t]{\textwidth}{\hfill{  {#2} }}%
+            \newline
+        }{}%
         \parbox[t]{\textwidth}{\raggedchapter#3}%
         \par\nobreak
     }%
@@ -245,11 +276,11 @@
 
 %%%% Abschnittsüberschriften
 \renewcommand\sectionformat{%
-    \textcolor{gray!70}{\thesection}\hspace*{10pt}%
+    \textcolor{section-number-color}{\thesection}\hspace*{10pt}%
 }
 
 \renewcommand\subsectionformat{%
-    \textcolor{gray!70}{\thesubsection}\hspace*{10pt}%
+    \textcolor{subsection-number-color}{\thesubsection}\hspace*{10pt}%
 }
 
 
@@ -275,8 +306,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\kotlin}[1]{
-% \colorbox{gray!8}{\mintinline{kotlin}{#1}}
-    \colorbox{gray!8}{\lstinline[
+% \colorbox{lst-background-color}{\mintinline{kotlin}{#1}}
+    \colorbox{lst-background-color}{\lstinline[
         language=Kotlin,
         breaklines,
         showstringspaces=false,
@@ -294,17 +325,17 @@
             %   numbersep=5pt,
             %   frame=lines,
             %   breaklines,
-            %   bgcolor=gray!8,
+            %   bgcolor=lst-background-color,
             %   baselinestretch=1,
             %   style=pastie, % igor % perldoc % friendly
             %   framesep=2mm]{kotlin}{./../resources/code/#1}
             \lstinputlisting[
                 language=Kotlin,
                 breaklines,
-                backgroundcolor=\color{gray!8},
+                backgroundcolor=\color{lst-background-color},
                 numbers=left,
                 breakatwhitespace=true,
-                postbreak=\llap{\scriptsize\textcolor{blue}{$\hookrightarrow$}\kern0.25em},
+                postbreak=\llap{\scriptsize\textcolor{lst-postbreak-color}{$\hookrightarrow$}\kern0.25em},
                 showstringspaces=false,
                 numberstyle=\scriptsize,
                 frame=lines]{./../resources/code/#1}
@@ -313,6 +344,89 @@
         \end{figure}
     }
 } % Beispiel: \kotlinfile{Example.kt}{Beispiel Code für xyz}
+
+
+\newcommand{\python}[1]{
+% \colorbox{lst-background-color}{\mintinline{kotlin}{#1}}
+    \colorbox{lst-background-color}{\lstinline[
+        language=Python,
+        breaklines,
+        showstringspaces=false,
+    ]{#1}}
+} % Beispiel: \python{fun asString() = this.toString()}
+
+\newcommand{\pythonfile}[2]{
+    \ifthenelse{\equal{\TextOnly}{1}}
+    {
+        [pythoncode here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{lst:#1}
+    }{
+        \begin{figure}[!htp]
+            \centering
+            % \inputminted[linenos,
+            %   numbersep=5pt,
+            %   frame=lines,
+            %   breaklines,
+            %   bgcolor=lst-background-color,
+            %   baselinestretch=1,
+            %   style=pastie, % igor % perldoc % friendly
+            %   framesep=2mm]{python}{./../resources/code/#1}
+            \lstinputlisting[
+                language=Python,
+                breaklines,
+                backgroundcolor=\color{lst-background-color},
+                numbers=left,
+                breakatwhitespace=true,
+                postbreak=\llap{\scriptsize\textcolor{lst-postbreak-color}{$\hookrightarrow$}\kern0.25em},
+                showstringspaces=false,
+                numberstyle=\scriptsize,
+                frame=lines]{./../resources/code/#1}
+            \caption{#2}
+            \label{lst:#1}
+        \end{figure}
+    }
+} % Beispiel: \pythonfile{Example.kt}{Beispiel Code für xyz}
+
+\newcommand{\sqlfile}[2]{
+    \ifthenelse{\equal{\TextOnly}{1}}
+    {
+        [sqlcode here, set \textbackslash{}TextOnly to \textbackslash{}False] \label{lst:#1}
+    }{
+        \begin{figure}[!htp]
+            \centering
+            % \inputminted[linenos,
+            %   numbersep=5pt,
+            %   frame=lines,
+            %   breaklines,
+            %   bgcolor=lst-background-color,
+            %   baselinestretch=1,
+            %   style=pastie, % igor % perldoc % friendly
+            %   framesep=2mm]{python}{./../resources/code/#1}
+            \lstinputlisting[
+                language=SQL,
+                breaklines,
+                backgroundcolor=\color{lst-background-color},
+                numbers=left,
+                breakatwhitespace=true,
+                postbreak=\llap{\scriptsize\textcolor{lst-postbreak-color}{$\hookrightarrow$}\kern0.25em},
+                showstringspaces=false,
+                numberstyle=\scriptsize,
+                frame=lines]{./../resources/code/#1}
+            \caption{#2}
+            \label{lst:#1}
+        \end{figure}
+    }
+} % Beispiel: \sqlfile{Example.sql}{Beispiel Code für xyz}
+
+\newcommand{\apiendpoint}[1]{
+% \colorbox{lst-background-color}{\mintinline{kotlin}{#1}}
+    \colorbox{lst-background-color}{\lstinline[
+        language={},
+        keywordstyle={\color{NavyBlue}\bfseries},
+        keywords={GET, PUT, POST, DELETE, OPTIONS, HEAD, PATCH},
+        breaklines,
+        showstringspaces=false,
+    ]{#1}}
+} % Beispiel: \apiendpoint{GET /api/v1/users/{id}}
 
 \newcommand{\yamlfile}[2]{
     \ifthenelse{\equal{\TextOnly}{1}}
@@ -325,17 +439,17 @@
             %   numbersep=5pt,
             %   frame=lines,
             %   breaklines,
-            %   bgcolor=gray!8,
+            %   bgcolor=lst-background-color,
             %   baselinestretch=1,
             %   style=pastie, % igor % perldoc % friendly
             %   framesep=2mm]{kotlin}{./../resources/code/#1}
             \lstinputlisting[
                 language=yaml,
                 breaklines,
-                backgroundcolor=\color{gray!8},
+                backgroundcolor=\color{lst-background-color},
                 numbers=left,
                 breakatwhitespace=true,
-                postbreak=\llap{\scriptsize\textcolor{NavyBlue}{$\hookrightarrow$}\kern0.25em},
+                postbreak=\llap{\scriptsize\textcolor{lst-postbreak-color}{$\hookrightarrow$}\kern0.25em},
                 showstringspaces=false,
                 numberstyle=\scriptsize\color{black},
                 rulecolor=\color{black},
@@ -357,10 +471,10 @@
                 language={},
                 basicstyle={\small\ttfamily},
                 breaklines,
-                backgroundcolor=\color{gray!8},
+                backgroundcolor=\color{lst-background-color},
                 numbers=left,
                 breakatwhitespace=true,
-                postbreak=\llap{\scriptsize\textcolor{blue}{$\hookrightarrow$}\kern0.25em},
+                postbreak=\llap{\scriptsize\textcolor{lst-postbreak-color}{$\hookrightarrow$}\kern0.25em},
                 showstringspaces=false,
                 numberstyle=\scriptsize,
                 frame=lines]{./../resources/text/#1}
@@ -453,7 +567,7 @@
         \begin{landscape}
             \begin{figure}[!htp]
                 \centering
-                \includegraphics[keepaspectratio]{./../resources/images/#1}
+                \includegraphics[keepaspectratio,width=1.18\textheight]{./../resources/images/#1}
                 \caption{#2}
                 \label{image:#1}
             \end{figure}
@@ -467,3 +581,9 @@
 \newcommand*{\labelref}[1]{\hyperref[{#1}]{\autoref*{#1}}}
 \newcommand*{\imageref}[1]{\hyperref[{image:#1}]{\autoref*{image:#1}}}
 \newcommand*{\coderef}[1]{\hyperref[{lst:#1}]{\autoref*{lst:#1}}}
+
+\newcommand*{\mailto}[1]{\href{mailto:#1}{#1}\xspace}
+
+\newcommand*{\gesetz}[1]{(#1)\xspace}
+
+\newcommand*{\inProgress}[0]{\todo[backgroundcolor=WildStrawberry!60]{In Arbeit ...}}
